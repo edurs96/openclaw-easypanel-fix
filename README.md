@@ -1,5 +1,23 @@
 # OpenClaw on Easypanel — Fix Guide
 
+> **If you landed here from a search:** the exact error this guide solves is
+> **`OpenClaw unauthorized: gateway token missing (open the dashboard URL and paste the token in Control UI settings)`**.
+>
+> The same root cause produces every one of these variants too:
+> - `origin not allowed (open the Control UI from the gateway host or allow it in gateway.controlUi.allowedOrigins)`
+> - `device pairing required (requestId: …)`
+> - `missing scope: operator.admin`
+> - `Refusing to bind gateway to lan without auth`
+> - `Proxy headers detected from untrusted address. Connection will not be treated as local.`
+> - `gateway auth mode is trusted-proxy, but a shared token is also configured`
+> - `Service is not reachable. Make sure the service is running and healthy.`
+> - `disconnected (1008): unauthorized: gateway token missing`
+> - `disconnected (1008): pairing required`
+>
+> Skip to **[TL;DR — the working setup](#tldr--the-working-setup)** for the fix, or read **[ITERATIONS.md](./ITERATIONS.md)** for the full debug story.
+
+---
+
 A debugged, end-to-end recipe for deploying **OpenClaw** behind **Traefik** on **Easypanel**, plus a Claude Code skill that walks an AI agent through the same fix automatically.
 
 This repo exists because getting OpenClaw to expose its Web Dashboard via a public domain on Easypanel is a *minefield* of conflicting auth modes, undocumented schema fields, and silent rejects. We hit every trap. This is the working configuration after 50+ iterations.
